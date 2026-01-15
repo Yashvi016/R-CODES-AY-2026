@@ -1,0 +1,21 @@
+x<-5  #genrate object x
+x  #print x
+print(X) 
+6<-y
+print(y)
+z<-1:100  #genrate z from 1 to 100
+m<-seq(1,100,5)  #1st lower limit, 2nd upper limit, 3rd interval
+seq(5,100,800)
+ls()  #list all the objects
+rm(x)  #remove object
+rm(list=ls())  #remove all objects
+x<-c(1,2,5,7,8,9,)  #combine command
+y<-c("a","b","c","d","e")  #combine command (string variable)
+m<-matrix(c(1,2,3,4),ncol=2)  #matrix value of object
+m<-matrix(c(1,2,3,4),nrow=2) 
+h<-matrix(c(5,10,9,6,3,4,2,0,11),ncol=3)  #task1
+i<-matrix(c(20,30,40,12,9,6),nrow=3)  #task2
+i1<-t(i)  #transpose of matrix i
+f<-function(x){x^2}  #function command
+a<--10:10
+b<-f(a)
