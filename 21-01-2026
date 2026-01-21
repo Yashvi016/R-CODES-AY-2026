@@ -1,0 +1,14 @@
+setwd("C:\\Users\\Dell\\Desktop\\Data for R")
+data2<-read.csv("21-01-2026.csv")
+library(ggplot2)
+a1<-ggplot(data=data2)
+a1<-a1+aes(x=experience,y=income)
+a1<-a1+geom_point(size=10,alpha=0.1) #aplha is transperancy of points
+a1<-a1+geom_text(aes(label=occupation),position="nudge")  # nudge means centre labeling
+
+
+
+a1<-ggplot(data=data2)
+a1<-a1+aes(x=experience,y=income,color=gender) # either use color or fill... color single color... fill leads to range of a color shade
+a1<-a1+geom_point(size=10,pch=10)  # size of points.... pch is punctutation.... designer points
+a1<-a1+geom_text(aes(label=gender),position="jitter")  #jitter means random labeling
