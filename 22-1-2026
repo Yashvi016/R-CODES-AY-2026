@@ -1,0 +1,22 @@
+x<-1:26
+y<-log(x)
+z<-letters[1:26]
+today<-data.frame(x,y,z)
+install.packages(gganimate)
+install.packages(gifski)
+library(gganimate)
+library(gifski)
+p<-ggplot(data=today)
+p<-p+aes(x=x,y=y)
+p<-p+geom_point(size=4,alpha=0.5)  # Size of plot..alpha
+ani_p<-p+transition_manual(x,cumulative=FALSE)  # animation technique added to existing plot
+animate(ani_p,renderer=gifski_renderer())
+ani_p<-p+transition_manual(x,cumulative=TRUE)
+animate(ani_p,renderer=gifski_renderer())
+p<-ggplot(data=today)
+p<-p+aes(x=x,y=y)
+p<-p+geom_point(size=x,alpha=0.5)  # Size of plot..alpha
+ani_p<-p+transition_manual(x,cumulative=FALSE)  # animation technique added to existing plot
+animate(ani_p,renderer=gifski_renderer())
+ani_p<-p+transition_manual(x,cumulative=TRUE)
+animate(ani_p,renderer=gifski_renderer())
