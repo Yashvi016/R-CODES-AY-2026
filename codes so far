@@ -1,0 +1,59 @@
+#install packages ----
+install.packages("ggplot2")
+install.packages("gganimate")
+install.packages("gifski")
+install.packages("rayshader")
+install.packages("av")
+# call library ----
+library(ggplot2)		#main package for plot
+library(gganimate)	#required for animation
+library(gifski)		#required for gif render
+library(rayshader)	#required to convert a ggplot into 3d
+library(av)			#required to save and play gif, movie(mp4) or snapshot
+# set work directory ----
+getwd()								#to know the work directory
+setwd("C:\\Users\\Akash\\Downloads\\dataforR")		#to change the work directory
+
+###### Scatter plot using ggplot2 (geom_point)######
+
+# data ----
+cgpa<-c(7.3,8.5,9,4.8,9.8,3.5,6.5,7.7)			# student's grade point data (in point)
+attn<-c(82,95.6,94,56,88,44.2,70,81)			# student's average attendance (in %)
+gen<-c("m","f","f","m","f","m","f","f")			# Student's gender (it is a factor variable)
+stu<-c(3,6,6.5,2,7,1,2,3.5)					# average daily self study (in hours)
+student_data<-data.frame(cgpa,attn,gen,stu)		# Data frame created
+
+# create an gg object with color according to a factor variable ----
+p1<-ggplot(data=student_data)						# gg object with data=student_data
+p1<-p1+(mapping=aes(x=attn,y=cgpa,color=gen))				# aesthetic mapping of x, y and color
+p1<-p1+geom_point(size=6)							# size of the points are fixed at 6
+p1<-p1+scale_color_manual(values = c("blue","red"))			# to change the color of factor variables
+
+# create an gg object with color according to a continuous variable ----
+p2<-ggplot(data=student_data)					
+p2<-p2+(mapping=aes(x=attn,y=cgpa,color=stu))		
+p2<-p2+geom_point(size=6)					
+p2<-p2+scale_color_gradient(low="yellow",high="purple")		# color according to a continuous var
+
+# create an gg object with size depends on a continuous variable ----
+p3<-ggplot(data=student_data)					
+p3<-p3+(mapping=aes(x=attn,y=cgpa,color=stu))		
+p3<-p3+geom_point(size=stu)							# size depents on the value of self study
+p3<-p3+scale_color_gradient(low="yellow",high="purple")	
+
+# create an gg object with label the points accodring a factor variable ----
+p4<-ggplot(data=student_data)					
+p4<-p4+(mapping=aes(x=attn,y=cgpa,color=stu))		
+p4<-p4+geom_point(size=3)					
+p4<-p4+scale_color_gradient(low="yellow",high="purple")	
+p4<-p4+geom_text(aes(label=gen),position="jitter")			# to label a point according to a factor variable	
+
+
+# create an gg animate plot ----
+p5<-ggplot(data=student_data)					
+p5<-p5+(mapping=aes(x=attn,y=cgpa,color=gen)) 							
+p5<-p5+geom_point(size=stu*3,alpha=.7)					# multiplied with 3 to scale up the size			
+p5_animate<-p5+transition_manual(attn,cumulative=TRUE)		#to animate according to attendance
+p5_animate<-animate(p5_animate,renderer=gifski_renderer())				#to render in gif
+anim_save(p5_animate,"scatter1.gif")
+
