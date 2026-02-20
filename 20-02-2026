@@ -1,0 +1,15 @@
+setwd("C:\\Users\\Dell\\Desktop\\Data for R")
+data<-read.csv("heart.csv") 
+head(data) # first 6 obs. with heading listed
+library(factoextra)
+library(ggplot2)
+scale_data<-scale(data)
+head(scale_data)
+dist_data<-dist(scale_data) # to calculate distance from the main point of custer
+# ecludian Distance
+head(dist_data)
+fviz_nbclust(scale_data,kmeans,method="wss")
+km.out<-kmeans(scale_data,centers=4,nstart=100)
+km.cluster<-km.out$cluster
+rownames(scale_data)<-paste(data$cholestrol.Code,1:dim(data)[1]) # to add names to the points 
+fviz_cluster(list(data=scale_data,cluster=km.cluster))
